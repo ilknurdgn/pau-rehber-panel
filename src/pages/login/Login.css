@@ -1,0 +1,84 @@
+.login-page {
+  min-height: 100vh;
+  background: var(--background-color);
+}
+
+.login-container {
+  max-width: 600px;
+  width: 100%;
+  max-height: 600px;
+  height: 100%;
+  margin: 0 auto;
+  margin-top: 120px;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-title {
+  color: var(--heading-color);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 40px;
+  text-align: center;
+  font-family: var(--font-family);
+}
+
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.login-input {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 8px;
+  background: var(--box-background);
+  color: var(--text-color);
+  font-size: 1.1rem;
+  font-family: var(--font-family);
+  outline: none;
+  transition: box-shadow 0.2s;
+}
+
+.login-input:focus {
+  box-shadow: 0 0 0 2px var(--accent-color);
+}
+
+.login-button {
+  margin: 0 auto;
+  padding: 10px 32px;
+  background: var(--accent-color);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: var(--font-family);
+}
+
+.login-button:hover {
+  background: #0284c7;
+}
+
+.login-forgot {
+  margin-top: 18px;
+  text-align: center;
+}
+
+.forgot-link {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.forgot-link:hover {
+  color: var(--accent-color);
+} 

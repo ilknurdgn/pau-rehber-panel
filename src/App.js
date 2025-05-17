@@ -5,6 +5,7 @@ import Navbar from './components/navbar/Navbar.js';
 import Sidebar from './components/sidebar/Sidebar.js';
 import Login from './pages/login/Login.js';
 import Home from './pages/home/Home.js';
+import UserList from './pages/users/UserList.js';
 
 function Layout({ children }) {
   return (
@@ -26,7 +27,9 @@ function AppRoutes() {
   ) : (
     <Layout>
       <Routes>
+      <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
+        <Route path="/users" element={<UserList />} />
         {/* Diğer route'lar buraya eklenebilir */}
       </Routes>
     </Layout>

@@ -17,16 +17,23 @@ const Login = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
       });
+
       const data = await res.json();
+
       if (data.success && data.payload?.token) {
         localStorage.setItem('token', data.payload.token);
-        navigate('/');
+        navigate('/'); // ✅ Başarılı girişten sonra yönlendirme
       } else {
         setError(data.message || 'Giriş başarısız');
       }
     } catch (err) {
       setError('Sunucu hatası');
     }
+  };
+
+  const handleForgotPassword = (e) => {
+    e.preventDefault();
+    navigate('/forgot-password'); // ✅ Şifremi unuttum yönlendirmesi
   };
 
   return (
@@ -53,12 +60,15 @@ const Login = () => {
           <button type="submit" className="login-button">GİRİŞ YAP</button>
         </form>
         {error && <div style={{ color: 'var(--delete-color)', marginTop: 12 }}>{error}</div>}
+
         <div className="login-forgot">
-          <a href="#" className="forgot-link">Şifremi Unuttum</a>
+          <a href="#" onClick={handleForgotPassword} className="forgot-link">
+            Şifremi Unuttum
+          </a>
         </div>
       </div>
     </div>
   );
 };
 
-export default Login; 
+export default Login;

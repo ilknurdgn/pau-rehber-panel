@@ -58,7 +58,7 @@
 }
 
 .userlist-table td:first-child {
-  color: #3b82f6; /* Mavi ID */
+  color: #3b82f6; 
   font-weight: 600;
 }
 
@@ -132,3 +132,79 @@
   font-size: 1rem;
   text-align: center;
 }
+
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: var(--background-color);
+  color: var(--heading-color);
+  padding: 50px;
+  border-radius: 8px;
+  width: 600px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #6b7280;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.modal input, .modal select {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 16px;
+  border-radius: 8px;
+  border: none;
+  background-color: #1e293b;
+  color: var(--text-color);
+  font-size: 14px
+}
+
+.modal input::placeholder,
+.modal select::placeholder {
+  color: var(--text-color); 
+  opacity: 0.3; 
+}
+
+.modal input:focus,
+.modal select:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: inherit;
+  box-shadow: 0 0 0 2px var(--accent-color);
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-confirm {
+  background-color: #0ea5e9;
+  color: var(--background-color);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 15px;
+}
+

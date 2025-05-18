@@ -30,13 +30,13 @@ const Sidebar = () => {
                 <span>Kullanıcılar</span>
               </div>
             </NavLink>
-            <NavLink to="/super-admins" className={({ isActive }) => isActive ? 'sidebar-link active' : 'sidebar-link'}>
+            <NavLink to="/superadmins" className={({ isActive }) => isActive ? 'sidebar-link active' : 'sidebar-link'}>
               <div className="sidebar-link-content">
                 <span className="sidebar-icon-placeholder" />
                 <span>Super Adminler</span>
               </div>
             </NavLink>
-            <NavLink to="/support-admins" className={({ isActive }) => isActive ? 'sidebar-link active' : 'sidebar-link'}>
+            <NavLink to="/supportadmins" className={({ isActive }) => isActive ? 'sidebar-link active' : 'sidebar-link'}>
               <div className="sidebar-link-content">
                 <span className="sidebar-icon-placeholder" />
                 <span>Destek Adminler</span>

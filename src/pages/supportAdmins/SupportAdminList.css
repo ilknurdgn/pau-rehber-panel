@@ -1,0 +1,36 @@
+.superadmin-page {
+    padding: 50px 80px;
+    margin-top: 56px;
+    color: var(--text-color);
+  }
+  
+  .superadmin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .loading-text,
+  .error-text {
+    margin-top: 16px;
+    font-size: 1rem;
+    text-align: center;
+  }
+  
+  
+  .create-admin-btn {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-right: 8px;
+  }
+  
+  .create-admin-btn:hover {
+    background-color: #0ea5e9cc;
+  }

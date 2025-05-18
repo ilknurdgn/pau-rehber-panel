@@ -6,7 +6,8 @@ import Sidebar from './components/sidebar/Sidebar.js';
 import Login from './pages/login/Login.js';
 import Home from './pages/home/Home.js';
 import UserList from './pages/users/UserList.js';
-
+import SuperAdminList from './pages/superAdmins/SuperAdminList.js';
+import SupportAdminList from './pages/supportAdmins/SupportAdminList.js';
 function Layout({ children }) {
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
@@ -30,7 +31,8 @@ function AppRoutes() {
       <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/users" element={<UserList />} />
-        {/* Diğer route'lar buraya eklenebilir */}
+        <Route path="/superadmins" element={<SuperAdminList />} />
+        <Route path="/supportadmins" element={<SupportAdminList />} />
       </Routes>
     </Layout>
   );

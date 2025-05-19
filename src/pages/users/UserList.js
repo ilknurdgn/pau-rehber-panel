@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './UserList.css';
 import DataTable from '../../components/dataTable/DataTable';
 import BaseModal from '../../components/baseModal/BaseModal';
+import { useNavigate } from 'react-router-dom';
 
 const API_URL = 'https://paurehber.ilknurdogan.dev/api/admin/users/';
 const FACULTIES_API = 'https://paurehber.ilknurdogan.dev/api/faculties/';
@@ -21,6 +22,9 @@ const disabilityLabels = {
 };
 
 export default function UserList() {
+
+  const navigate = useNavigate();
+
   // Data states
   const [users, setUsers] = useState([]);
   const [faculties, setFaculties] = useState([]);
@@ -31,6 +35,9 @@ export default function UserList() {
   const [error, setError] = useState('');
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
 
   // Form states
   const [formData, setFormData] = useState({
@@ -90,6 +97,83 @@ export default function UserList() {
     } catch {
       setDepartmentOptions([]);
     }
+  };
+
+  // Image click handler
+  const handleImageClick = (user) => {
+    setSelectedUserId(user.id);
+    setIsPhotoModalOpen(true);
+    setSelectedFile(null);
+  };
+
+  // Photo upload handler
+  const handlePhotoUpload = async () => {
+    if (!selectedFile || !selectedUserId) {
+      console.error('Upload öncesi eksik parametre:', { selectedFile, selectedUserId });
+      return;
+    }
+  
+    
+  
+    try {
+
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+
+      const token = localStorage.getItem("token");
+      const res = await fetch(`https://paurehber.ilknurdogan.dev/api/admin/users/profile-photo/${selectedUserId}`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        body: formData
+      });
+  
+      const json = await res.json();
+      
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Sunucudan başarılı dönüş alınamadı");
+      }
+  
+      // Güncellenmiş verileri yeniden çek
+      const ures = await fetch(API_URL, { headers: { Authorization: `Bearer ${token}` } });
+      const uj = await ures.json();
+      setUsers(uj.payload);
+  
+      setIsPhotoModalOpen(false);
+    } catch (e) {
+      alert("Fotoğraf yüklenemedi: " + e.message);
+    }
+  };
+  
+
+  // Photo delete handler
+  const handlePhotoDelete = async () => {
+    if (!selectedUserId) return;
+  
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`https://paurehber.ilknurdogan.dev/api/admin/users/profile-photo/${selectedUserId}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` }
+      });
+  
+      if (!res.ok) throw new Error("Silme işlemi başarısız");
+  
+      const ures = await fetch(API_URL, { headers: { Authorization: `Bearer ${token}` } });
+      const uj = await ures.json();
+      setUsers(uj.payload);
+  
+      setIsPhotoModalOpen(false);
+    } catch (e) {
+      alert("Fotoğraf silinemedi: " + e.message);
+    }
+  };
+  
+
+  // Detail handler
+  const handleDetail = (id) => {
+    navigate(`/users/${id}`);
   };
 
   // Create handler
@@ -203,7 +287,7 @@ export default function UserList() {
         ? <p>Yükleniyor...</p>
         : error
           ? <p>{error}</p>
-          : <DataTable data={data} columns={columns} onEdit={openUpdate} onDelete={handleDelete} />
+          : <DataTable data={data} columns={columns} onDetail={handleDetail} onEdit={openUpdate} onDelete={handleDelete} onImageClick={handleImageClick} />
       }
 
       {/* Create Modal */}
@@ -334,6 +418,27 @@ export default function UserList() {
           </form>
         </BaseModal>
       )}
+
+{isPhotoModalOpen && (
+  <BaseModal title="Profil Fotoğrafını Güncelle" isOpen onClose={() => setIsPhotoModalOpen(false)}>
+    <div className="form-group">
+      <input
+        type="file"
+        accept="image/*"
+        onChange={(e) => setSelectedFile(e.target.files[0])}
+      />
+    </div>
+    <div className="modal-buttons">
+      <button className="modal-confirm" onClick={handlePhotoUpload} disabled={!selectedFile}>
+        Yükle
+      </button>
+      <button className="modal-danger" onClick={handlePhotoDelete}>
+        Sil
+      </button>
+    </div>
+  </BaseModal>
+)}
+
     </div>
   );
 }

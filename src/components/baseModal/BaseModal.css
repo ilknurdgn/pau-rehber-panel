@@ -88,3 +88,16 @@
     background-color: #0ea5e9cc;
   }
   
+  .modal-danger {
+    background-color: #cc3333;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    margin-left: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .modal-danger:hover {
+    background-color: #aa2222;
+  }

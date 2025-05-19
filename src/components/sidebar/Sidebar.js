@@ -6,8 +6,8 @@ import { FiMapPin } from "react-icons/fi";
 import { FaRegUser } from "react-icons/fa";
 
 const Sidebar = () => {
-  const [openUserMenu, setOpenUserMenu] = useState(true);
-  const [openNavMenu, setOpenNavMenu] = useState(true);
+  const [openUserMenu, setOpenUserMenu] = useState(false);
+  const [openNavMenu, setOpenNavMenu] = useState(false);
 
   return (
     <aside className="sidebar">

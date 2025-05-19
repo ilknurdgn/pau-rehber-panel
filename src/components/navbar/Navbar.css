@@ -31,4 +31,11 @@
   letter-spacing: 1px;
   margin-left: 12px;
   font-family: var(--font-family);
+  cursor: pointer;
+  
 } 
+
+.navbar-title a{
+  text-decoration: none;
+  color: inherit;
+}

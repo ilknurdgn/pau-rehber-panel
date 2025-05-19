@@ -2,9 +2,10 @@ import React from 'react';
 import { FaUser } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 import './DataTable.css';
 
-export default function DataTable({ data, columns, onEdit, onDelete, onImageClick }) {
+export default function DataTable({ data, columns, onDetail, onEdit, onDelete, onImageClick }) {
   return (
     <div className="datatable-wrapper">
       <table className="datatable">
@@ -36,6 +37,9 @@ export default function DataTable({ data, columns, onEdit, onDelete, onImageClic
               ))}
               <td>
                 <div className="datatable-actions">
+                {onEdit && (
+                    <button className="detail-btn" onClick={() => onDetail(item.id)}><MdOutlineRemoveRedEye /></button>
+                  )}
                   {onEdit && (
                     <button className="edit-btn" onClick={() => onEdit(item)}><FiEdit /></button>
                   )}

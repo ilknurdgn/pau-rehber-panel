@@ -1,0 +1,75 @@
+.detail-page {
+    padding: 50px 80px;
+    margin-top: 56px;
+    color: var(--text-color);
+  }
+  
+  .detail-container {
+    padding: 2rem;
+    background-color: #1e293b;
+    border-radius: 12px;
+  }
+
+  .detail-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+    color: #ccc;
+    font-size: 1.4rem;
+  }
+  
+  .back-button {
+    background: transparent;
+    border: none;
+    color: #ccc;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s;
+  }
+  
+  .back-button:hover {
+    color: white;
+  }
+  
+  .detail-title {
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding-bottom: 5px;
+  }
+  
+  .detail-profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: none;
+    background-color: white;
+    margin-right: 43%;
+  }
+  
+  .detail-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  
+  .detail-table tr {
+    border-top: 0.5px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .detail-table td {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    vertical-align: middle;
+  }
+  
+  .detail-table td:first-child {
+    color: #bbb;
+    font-weight: 500;
+    width: 23%;
+  }
+  
+ 
+  

@@ -62,6 +62,7 @@
     justify-content: space-around;
   }
   
+  .detail-btn,
   .edit-btn,
   .delete-btn {
     background: none;
@@ -72,6 +73,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .detail-btn {
+    color: var(--text-color);
+  }
+
+  .detail-btn:hover {
+    color: #3b82f6;
   }
   
   .edit-btn {

@@ -70,6 +70,40 @@
     font-weight: 500;
     width: 23%;
   }
+
+  .related-section {
+    margin-top: 2rem;
+  }
+
+  .departments-header{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+    color: #ccc;
+    font-size: 1.4rem;
+  }
+
+  .departments-header h3 {
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
+
+  .departments-header button {
+    background: transparent;
+    border: none;
+    color: #ccc;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding-top: 5px;
+    transition: color 0.2s;
+  }
+
+  .departments-header button:hover {
+    color: white;
+  }
+
+
   
  
   

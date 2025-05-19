@@ -19,6 +19,7 @@ import UserList from './pages/users/UserList.js';
 import SuperAdminList from './pages/superAdmins/SuperAdminList.js';
 import SupportAdminList from './pages/supportAdmins/SupportAdminList.js';
 import GenericDetail from './pages/detail/GenericDetail.js';
+import FacultyList from'./pages/faculty/FacultyList.js';
 
 const originalFetch = window.fetch;
 
@@ -110,6 +111,8 @@ export default function App() {
           <Route path="/supportadmins" element={<SupportAdminList />} />
           <Route path="*" element={<Navigate to="/" replace />} />
           <Route path="/users/:id" element={<GenericDetail />} />
+          <Route path="/faculties" element={<FacultyList />} />
+          <Route path="/faculties/:id" element={<GenericDetail />} />
         </Route>
       </Routes>
     </Router>

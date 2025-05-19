@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import "./GenericDetail.css";
 import { FiChevronLeft } from "react-icons/fi";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import DataTable from "../../components/dataTable/DataTable.js";
 
 const ENTITY_ENDPOINT_MAP = {
   users: "admin/users",
@@ -45,8 +47,7 @@ const ENTITY_TITLE_MAP = {
     faculties: [
       { key: "id", label: "Id" },
       { key: "facultyName", label: "Fakülte Adı" },
-      { key: "facultyCode", label: "Kod" },
-      { key: "createdAt", label: "Oluşturulma Tarihi" }
+      { key: "floorCount", label: "Kat Sayısı" },
     ],
     admins: [
       { key: "id", label: "Id" },
@@ -70,6 +71,8 @@ export default function GenericDetail() {
 
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [related, setRelated] = useState([]);
+  const [openDepartments, setOpenDepartments] = useState(false);
 
   const entityType = location.pathname.split("/")[1];
 
@@ -89,6 +92,14 @@ export default function GenericDetail() {
         if (!res.ok || !json.success) throw new Error(json.message);
 
         setItem(json.payload);
+
+        if (entityType === 'faculties') {
+          const depRes = await fetch(
+            `https://paurehber.ilknurdogan.dev/api/departments/?facultyId=${id}`
+          );
+          const depJson = await depRes.json();
+          if (depRes.ok && depJson.success) setRelated(depJson.payload);
+        }
       } catch (err) {
         console.error("Detay getirilemedi:", err);
       } finally {
@@ -99,8 +110,23 @@ export default function GenericDetail() {
     fetchData();
   }, [id, entityType]);
 
+  
+
   if (loading) return <p>Yükleniyor...</p>;
   if (!item) return <p>Detay bilgisi bulunamadı.</p>;
+
+  const imageUrl =
+    entityType === "users"
+      ? item.profilePhotoUrl
+      : entityType === "faculties"
+      ? item.facultyLogoUrl
+      : null;
+
+
+  const departmentColumns = [
+    { key: 'id', label: 'ID' },
+    { key: 'departmentName', label: 'Bölüm Adı' }
+  ];
 
   return (
     <div className="detail-page">
@@ -112,10 +138,10 @@ export default function GenericDetail() {
     </div>
 
       <div className="detail-container">
-        {item.profilePhotoUrl && (
+        {imageUrl && (
           <div style={{ textAlign: "center", marginBottom: "1rem" }}>
             <img
-              src={item.profilePhotoUrl}
+              src={imageUrl}
               alt="Profil"
               className="detail-profile-img"
             />
@@ -136,8 +162,19 @@ export default function GenericDetail() {
     ))}
   </tbody>
 </table>
-
       </div>
+
+      {entityType === 'faculties' && (
+          <div className="related-section">
+            <div className="departments-header" onClick={() => setOpenDepartments(prev => !prev)}>
+              <button>{openDepartments ? <FiChevronUp /> : <FiChevronDown />}</button>
+              <h3>Bu Fakülteye Ait Bölümler</h3>
+            </div>
+            {openDepartments && (
+              <DataTable data={related} columns={departmentColumns} />
+            )}
+          </div>
+        )}
     </div>
   );
 }

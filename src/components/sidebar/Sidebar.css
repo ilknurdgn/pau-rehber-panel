@@ -24,6 +24,10 @@
   color: var(--text-color); 
 }
 
+.sidebar-title:hover {
+  background: var(--box-background);
+}
+
 .sidebar-title-left {
   display: flex;
   align-items: center;
@@ -36,13 +40,14 @@
 
 .sidebar-chevron {
   font-size: 1.1rem;
+  padding-top: 2px;
   color: var(--heading-color);
 }
 
 .sidebar-link {
   text-decoration: none;
   color: var(--text-color);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   transition: all 0.2s ease;
 }
 
@@ -54,7 +59,6 @@
 }
 
 .sidebar-link-content:hover {
-  background: var(--box-background);
   color: var(--accent-color);
 }
 

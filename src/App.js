@@ -20,6 +20,7 @@ import SuperAdminList from './pages/superAdmins/SuperAdminList.js';
 import SupportAdminList from './pages/supportAdmins/SupportAdminList.js';
 import GenericDetail from './pages/detail/GenericDetail.js';
 import FacultyList from'./pages/faculty/FacultyList.js';
+import ForgotPassword from './pages/forgotPassword/ForgotPassword.js';
 
 const originalFetch = window.fetch;
 
@@ -76,45 +77,57 @@ function PrivateRoute({ children }) {
   return isTokenValid() ? children : <Navigate to="/login" replace />;
 }
 
-function Layout({ children }) {
+function PublicLayout() {
   return (
-    <div style={{ display: 'flex', minHeight: '100vh' }}>
-      <Sidebar />
-      <div style={{ flex: 1 }}>
-        <Navbar />
-        {children}
-      </div>
-    </div>
+    <>
+      <Navbar />
+      <Outlet />
+    </>
   );
 }
 
 function ProtectedLayout() {
   return (
     <PrivateRoute>
-      <Layout>
-        <Outlet />
-      </Layout>
+      <div style={{ display: 'flex', minHeight: '100vh' }}>
+        <Sidebar />
+        <div style={{ flex: 1 }}>
+          <Navbar />
+          <Outlet />
+        </div>
+      </div>
     </PrivateRoute>
   );
 }
 
+
 export default function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/login" element={<Login />} />
+  <Routes>
 
-        <Route element={<ProtectedLayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/users" element={<UserList />} />
-          <Route path="/superadmins" element={<SuperAdminList />} />
-          <Route path="/supportadmins" element={<SupportAdminList />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-          <Route path="/users/:id" element={<GenericDetail />} />
-          <Route path="/faculties" element={<FacultyList />} />
-          <Route path="/faculties/:id" element={<GenericDetail />} />
-        </Route>
-      </Routes>
-    </Router>
+    {/* 🔓 Public Routes (sadece Navbar) */}
+    <Route element={<PublicLayout />}>
+      <Route path="/login" element={<Login />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+    </Route>
+
+    {/* 🔐 Protected Routes (Navbar + Sidebar) */}
+    <Route element={<ProtectedLayout />}>
+      <Route path="/" element={<Home />} />
+      <Route path="/users" element={<UserList />} />
+      <Route path="/superadmins" element={<SuperAdminList />} />
+      <Route path="/supportadmins" element={<SupportAdminList />} />
+      <Route path="/users/:id" element={<GenericDetail />} />
+      <Route path="/faculties" element={<FacultyList />} />
+      <Route path="/faculties/:id" element={<GenericDetail />} />
+    </Route>
+
+    {/* Her şeyi yakalayıp ana sayfaya yönlendir */}
+    <Route path="*" element={<Navigate to="/" replace />} />
+
+  </Routes>
+</Router>
+
   );
 }

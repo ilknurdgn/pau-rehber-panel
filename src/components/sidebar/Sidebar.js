@@ -51,7 +51,7 @@ const Sidebar = () => {
         <div className="sidebar-title" onClick={() => setOpenNavMenu(prev => !prev)}>
           <div className="sidebar-title-left">
             <span className="sidebar-icon"><FiMapPin /></span>
-            <span>Navigasyon İşlemleri</span>
+            <span>Fakülte İşlemleri</span>
           </div>
           <span className="sidebar-chevron">
             {openNavMenu ? <FiChevronUp /> : <FiChevronDown />}
@@ -65,7 +65,7 @@ const Sidebar = () => {
                 <span>Fakülteler</span>
               </div>
             </NavLink>
-            <NavLink to="/access-point" className={({ isActive }) => isActive ? 'sidebar-link active' : 'sidebar-link'}>
+            {/* <NavLink to="/access-point" className={({ isActive }) => isActive ? 'sidebar-link active' : 'sidebar-link'}>
               <div className="sidebar-link-content">
                 <span className="sidebar-icon-placeholder" />
                 <span>Access Point</span>
@@ -82,7 +82,7 @@ const Sidebar = () => {
                 <span className="sidebar-icon-placeholder" />
                 <span>Node</span>
               </div>
-            </NavLink>
+            </NavLink> */}
           </>
         )}
       </div>

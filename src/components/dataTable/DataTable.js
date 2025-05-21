@@ -37,7 +37,7 @@ export default function DataTable({ data, columns, onDetail, onEdit, onDelete, o
               ))}
               <td>
                 <div className="datatable-actions">
-                {onEdit && (
+                {onDetail && (
                     <button className="detail-btn" onClick={() => onDetail(item.id)}><MdOutlineRemoveRedEye /></button>
                   )}
                   {onEdit && (

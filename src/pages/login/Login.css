@@ -1,5 +1,8 @@
 .login-page {
-  min-height: 100vh;
+  min-height: calc(100vh - 150px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: var(--background-color);
 }
 
@@ -75,10 +78,9 @@
 .forgot-link {
   color: var(--text-color);
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 0.9rem;
   transition: color 0.2s;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
-
-.forgot-link:hover {
-  color: var(--accent-color);
-} 

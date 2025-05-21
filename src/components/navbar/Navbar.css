@@ -39,3 +39,19 @@
   text-decoration: none;
   color: inherit;
 }
+
+.navbar-button {
+  background: transparent;
+  outline: none; 
+  color: var(--text-color);
+  border: none;
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: var(--font-family);
+}
+
+.navbar-button:hover {
+  color: var(--accent-color);
+}

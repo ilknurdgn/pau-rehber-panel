@@ -1,12 +1,31 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
+import { useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+
+  const isTokenValid = () => {
+    const token = localStorage.getItem('token');
+    if (!token) return false;
+    try {
+      const { exp } = jwtDecode(token);
+      return exp * 1000 > Date.now();
+    } catch {
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    if (isTokenValid()) {
+      navigate('/');
+    }
+  }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -62,9 +81,9 @@ const Login = () => {
         {error && <div style={{ color: 'var(--delete-color)', marginTop: 12 }}>{error}</div>}
 
         <div className="login-forgot">
-          <a href="#" onClick={handleForgotPassword} className="forgot-link">
+          <button onClick={handleForgotPassword} className="forgot-link">
             Şifremi Unuttum
-          </a>
+          </button>
         </div>
       </div>
     </div>
